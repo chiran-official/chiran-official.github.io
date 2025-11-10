@@ -23,28 +23,38 @@
     ================================================== -->
     <link rel="shortcut icon" href="assets/img/user-sidebar-thumb.png" sizes="any">
 
-    <!-- Google Fonts
+    <!-- Performance Optimizations
+    ================================================== -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Google Fonts - Optimized Loading
     ================================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- All CSS Here
+    <!-- All CSS Here - Optimized for Performance
     ================================================== -->
-    <link rel="stylesheet" href="assets/css/fontAwesome5Pro.css">
+    <!-- FontAwesome 6 via CDN - Much lighter than 15MB local files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+
     <link rel="stylesheet" href="assets/css/cdheadline.css">
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/modern-animations.css">
 
 </head>
 
-<body class="relative custom_cursor">
+<body class="relative custom_cursor page-transition gpu-accelerated">
     <!-- Custom Cursor Start -->
     <div
-        class="custom_cursor_one fixed top-0 left-0 w-8 h-8 border border-gray-400 rounded-full pointer-events-none">
+        class="custom_cursor_one fixed top-0 left-0 w-8 h-8 border border-gray-400 rounded-full pointer-events-none transition-all duration-150">
     </div>
     <div
-        class="custom_cursor_two w-1 h-1 rounded-full border border-gray-400 bg-metborder-gray-400 fixed pointer-events-none left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        class="custom_cursor_two w-1 h-1 rounded-full border border-gray-400 bg-metborder-gray-400 fixed pointer-events-none left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-75">
     </div>
     <!-- Custom Cursor End -->
 
@@ -227,14 +237,16 @@
                     <div class="mx-4 mt-12 text-center user-info lg:mx-6">
                         <a href="index.html"
                             class="w-36 mb-2.5 h-3w-36 block mx-auto border-6 border-platinum dark:border-[#2f2f2f] overflow-hidden rounded-full">
-                            <img 
-                                src="assets/img/user-sidebar-thumb.png" 
+                            <img
+                                src="assets/img/user-sidebar-thumb.png"
                                 class="hidden dark:block w-full h-full rounded-full"
-                                alt="Brown Reddick"> <!--Image for Dark Version -->
-                            <img 
-                                src="assets/img/user-sidebar-thumb-light.png" 
+                                alt="Brown Reddick"
+                                loading="lazy"> <!--Image for Dark Version -->
+                            <img
+                                src="assets/img/user-sidebar-thumb-light.png"
                                 class="dark:hidden w-full h-full rounded-full"
-                                alt="Brown Reddick"> <!--Image for Light Version -->
+                                alt="Brown Reddick"
+                                loading="lazy"> <!--Image for Light Version -->
                         </a>
                         <h6 class="mb-1 text-lg font-semibold text-black dark:text-white name">Chiran Subasinghe</h6>
                         <div class="leading-none cd-headline clip is-full-width">
@@ -1860,16 +1872,42 @@
     </div>
     <!-- Ends Here -->
 
-    <!-- Js Library Start -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/tw-elements.umd.min.js"></script>
-    <script src="assets/js/cd-headline.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/scrollIt.min.js"></script>
-    <script src="assets/js/circle-progress.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <!-- Js Library Start - Optimized with defer for faster page load -->
+    <script src="assets/js/jquery-3.6.0.min.js" defer></script>
+    <script src="assets/js/waypoints.min.js" defer></script>
+    <script src="assets/js/tw-elements.umd.min.js" defer></script>
+    <script src="assets/js/cd-headline.js" defer></script>
+    <script src="assets/js/jquery.counterup.min.js" defer></script>
+    <script src="assets/js/swiper-bundle.min.js" defer></script>
+    <script src="assets/js/scrollIt.min.js" defer></script>
+    <script src="assets/js/circle-progress.min.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
+    <script src="assets/js/modern-enhancements.js" defer></script>
+
+    <!-- Modern Scroll Reveal Animation Script -->
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for scroll reveal animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with scroll-reveal class
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
     <!-- Js Library End -->
 </body>
 
